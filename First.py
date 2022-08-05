@@ -1,3 +1,4 @@
+from time import sleep
 import discord
 from discord.ext import commands,tasks
 import os
@@ -7,6 +8,7 @@ import requests
 import json
 import random
 import eventstest
+import asyncio
 
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
@@ -17,8 +19,16 @@ help_words = ["help", "don't know", "why","not sure", "how"]
 
 bot = commands.Bot(command_prefix= '!',intents=intents)
 
+ #making it seem like the bot is typing 
+"""async def typing(ctx):
+    #start typing
+    async with ctx.typing():
+        await asyncio.sleep(2)"""
+
 @bot.command()
 async def foo(ctx,*replyie):
+    async with ctx.typing():
+        await asyncio.sleep(2)
     try:
         message = await ctx.channel.fetch_message(ctx.message.reference.message_id)
         joined = ' '.join(replyie)
@@ -62,11 +72,6 @@ async def on_message(message):
     #in order to reply to the user, we simply just need to reply to the message. 
     #check if the message is a reply in the dm channel(two boolean checks)
     #if so, make this a command or start eith 'get' get the author of the message it is referencing and send the dm or reply to them. """
-    """if eventstest.check(message) and message.channel.id == 1003891273918324806: 
-        print("this is true")
-        holder = message
-        replie = await eventstest.Nreply(message) #need to fix this this is where it is getting the message it is being replied to
-        print(replie)"""
 
     """
     if message.content.startswith('get'):
