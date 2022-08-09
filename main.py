@@ -10,6 +10,7 @@ import random
 import eventstest
 import asyncio
 
+
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
 intents = discord.Intents().all() #
@@ -25,7 +26,7 @@ bot = commands.Bot(command_prefix= '!',intents=intents)
     async with ctx.typing():
         await asyncio.sleep(2)"""
 
-@bot.command()
+@bot.command() #reply command
 async def foo(ctx,*replyie):
     async with ctx.typing():
         await asyncio.sleep(2)
@@ -85,11 +86,6 @@ async def on_message(message):
             #await i.reply("replied") #how to reply to the dm 
         #we need to check if the channel is a dm channel for the onmesssage event. """
 
+bot.load_extension("Inspire")
 
-
-
-    
-
-
-#client.run('OTk5MTEzNTc1NTg1MDIyMDEy.GsL6LH.LCitOoB6Cyd45jnFGPehubL2CTFI8a9l3YUQxg')
 bot.run('OTk5MTEzNTc1NTg1MDIyMDEy.GsL6LH.LCitOoB6Cyd45jnFGPehubL2CTFI8a9l3YUQxg')
