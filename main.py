@@ -87,5 +87,6 @@ async def on_message(message):
         #we need to check if the channel is a dm channel for the onmesssage event. """
 
 bot.load_extension("Inspire")
+bot.load_extension("events")
 
 bot.run('OTk5MTEzNTc1NTg1MDIyMDEy.GsL6LH.LCitOoB6Cyd45jnFGPehubL2CTFI8a9l3YUQxg')
