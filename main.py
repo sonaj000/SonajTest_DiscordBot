@@ -14,6 +14,7 @@ import asyncio
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
 intents = discord.Intents().all() #
+intents.members = True
 client = discord.Client(intents=intents) #our bot
 
 help_words = ["help", "don't know", "why","not sure", "how"]

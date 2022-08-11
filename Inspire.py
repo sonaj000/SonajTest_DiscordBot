@@ -17,8 +17,6 @@ class Inspire(commands.Cog, name = "Inspire"):
     @commands.Cog.listener()
     async def on_message(self,message):
         trigger_words = ['sad','depressed','angry','upset']
-        print(message.author)
-        print(commands.bot)
         if discord.Member.bot:
             return
         if message.channel.name == "testinput":
