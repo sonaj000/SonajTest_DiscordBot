@@ -1,3 +1,5 @@
+from cmath import nan
+import string
 import discord
 from discord.ext import commands
 import json
@@ -5,12 +7,16 @@ from datetime import datetime
 from discord import Embed
 from discord.utils import get
 
+client = commands.Bot(command_prefix='!')
+
+
 class Events(commands.Cog):
 
     def __init__(self,bot : commands ):
         self.bot = bot
         self.emoji = ['1\u20e3', '2\u20e3', '3\u20e3', '4\u20e3', '5\u20e3',
                       '6\u20e3', '7\u20e3', '8\u20e3', '9\u20e3', '\U0001F51F']
+        self.playtesters = {}
                     
     @commands.command()
     async def poll(self, ctx, question, *options: str):
@@ -46,6 +52,29 @@ class Events(commands.Cog):
             for i in range(5):
                 await message.add_reaction(self.emoji[i])
     
+    
+    async def make_channel(self,ctx,name : int):
+        guild = ctx.guild
+        member = ctx.author
+        print(member)
+        admin_role = get(guild.roles, name="Guinea_Pig") #change admin here to guinea pig
+        overwrites = {
+            guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            member: discord.PermissionOverwrite(read_messages=True),
+            admin_role: discord.PermissionOverwrite(read_messages=True),
+            guild.me: discord.PermissionOverwrite(read_messages=True)
+            }
+            
+        channel = await guild.create_text_channel(str(name), overwrites=overwrites)
+
+    @commands.command()
+    async def get_channel(self,ctx,name : int):
+        guild = ctx.guild
+        print(guild)
+        channel = discord.utils.get(guild.text_channels, name=str(name))
+        print("channel name is: ",channel.name)
+        print(self.playtesters)
+
     @commands.command()
     async def test_role(self,ctx):
         #find all members with this role and get their id and stuff
@@ -56,18 +85,41 @@ class Events(commands.Cog):
                 if role.id == want_id:
                     mem.append(member.id)
                     break
-        print(mem)
-        """for all members with the role tester, get their id and put them in a list. then for each id in the list, make a private channel with them. """
+        for i in mem:
+            self.playtesters[i] = nan
 
-    async def make_channel(self,ctx):
-        guild = ctx.guild
-        member = ctx.author
-        admin_role = get(guild.roles, name="Admin") #change admin here to guinea pig
-        overwrites = {
-            guild.default_role: discord.PermissionOverwrite(read_messages=False),
-            member: discord.PermissionOverwrite(read_messages=True),
-            admin_role: discord.PermissionOverwrite(read_messages=True)}
-        channel = await guild.create_text_channel('secret', overwrites=overwrites)
+        print(len(self.playtesters)) 
+        counter = 0
+        #if channel already exists ignore
+        for key in self.playtesters:
+            #if get channel is wrong then bleh 
+            await self.make_channel(ctx, counter)
+            channel = discord.utils.get(ctx.guild.channels, name= str(counter))
+            self.playtesters[key] = channel
+            counter += 1
+        print(self.playtesters)
+    
+    @commands.Cog.listener()
+    async def on_message(self,message):
+        print("triggered")
+        msg = message.content #any message 
+    #we can use this to check for any words in the msg like help or whatever. 
+
+        if message.channel.type.name == "private":
+            dm_channel = self.playtesters[message.author.id] #whichever channel we will end up using for the private one
+            dm = await dm_channel.send("I received a DM from " + str(message.author) + " saying " + message.content)
+        else:
+            print("nope")
+
+    """for all members with the role tester, get their id and put them in a dictionary. make a private channel for each member and get the id of each channel and put themin the dictionary, 
+    if the dm is private and message.author.role == any of the playtesters, find the member id in the dictionary and sends its dm to the corresponding channel"""
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        channel = member.guild.system_channel
+        if channel is not None:
+            await channel.send('Welcome to Dork Dock {0.mention}. I have no clue what I am doing but das okay daijoubu'.format(member))
+
 
 def setup(bot):
     bot.add_cog(Events(bot))

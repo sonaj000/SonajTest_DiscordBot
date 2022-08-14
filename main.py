@@ -11,6 +11,7 @@ import eventstest
 import asyncio
 
 
+
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
 intents = discord.Intents().all() #
@@ -53,8 +54,8 @@ async def on_ready():
         test_channel = bot.get_channel(999386683281768448)
         test_server = bot.get_guild(972381779904327700)
         await test_channel.send("Hi. This is SonajTest Bot at your service!")
-    
 
+    
 @bot.listen()
 async def on_message(message):
     if message.content.startswith('$hello'):
