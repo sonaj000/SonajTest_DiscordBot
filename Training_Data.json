@@ -1,0 +1,90 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi",
+          "Hey",
+          "How are you",
+          "How u doin?",
+          "What's up?",
+          "Hello",
+          "Good day",
+          "Yo"
+        ],
+        "responses": [
+          "Hey babe :D ",
+          "Hello, you looking fine af babe goddammnnn",
+          "OHAIYO Dweeb, jk jk",
+          "Hey Hey",
+          "Hi there, how can I help?"
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Bye", "See you later", "Goodbye"],
+        "responses": [
+          "See you on the Summoners Rift :P",
+          "Have a nice day",
+          "Bye! Come back again soon <3.",
+          "I'll see you soon babe <3 "
+        ]
+      },
+      {
+        "tag": "thanks",
+        "patterns": ["Thanks", "Thank you", "That's helpful", "Thank's a lot!"],
+        "responses": ["Happy to help!", "Any time!", "My pleasure", "of course man"]
+      },
+      {
+        "tag": "items",
+        "patterns": [
+          "Which items do you have?",
+          "What kinds of items are there?",
+          "What do you sell?"
+        ],
+        "responses": [
+          "We sell coffee and tea",
+          "We have coffee and tea"
+        ]
+      },
+      {
+        "tag": "activites",
+        "patterns": [
+          "What do you want to do tonight?",
+          "I'm bored, what do you want to do",
+          "I want to do something with you",
+          "let's do something fun"
+        ],
+        "responses": [
+          "What are you feeling tonight? Do you want to go clubbing?",
+          "We could stay in and climb ranked. I'll carry your ass :P",
+          "Wanna watch KDrama?"
+        ]
+      },
+      {
+        "tag": "Moody",
+        "patterns": [
+          "I am not feeling well",
+          "I am feeling a little down",
+          "Not feeling the best today", 
+          "feeling sad and depressed",
+          "I cried today and didn't do anything"
+        ],
+        "responses": [
+          "I'm sorry man, that blows chunks. I hope you feel better soon",
+          "damn, das valid. listen, lmk if you ever need anything man. I gotchu"
+        ]
+      },
+      {
+        "tag": "funny",
+        "patterns": [
+          "be cringe!",
+          "Be funny"
+        ],
+        "responses": [
+          "I am super hontoni sugoi cringe desne in trying to be funny",
+          "bruh skull emoji times 7 "
+        ]
+      }
+    ]
+  }
