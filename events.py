@@ -16,12 +16,13 @@ class Events(commands.Cog):
         self.bot = bot
         self.emoji = ['1\u20e3', '2\u20e3', '3\u20e3', '4\u20e3', '5\u20e3',
                       '6\u20e3', '7\u20e3', '8\u20e3', '9\u20e3', '\U0001F51F']
+        self.emotions = ["joy","anger","disgust","fear","sadness","surprise"]
         self.playtesters = {}
                     
     @commands.command()
     async def poll(self, ctx, question, *options: str):
-        if len(options) > 5:
-            await ctx.send("you can only send a maximum of 5 options")
+        if len(options) > 6:
+            await ctx.send("you can only send a maximum of 6 options")
         else:
             embed = Embed(title = "poll",description = question,colour =  ctx.author.colour,timestamp = datetime.utcnow())
             fields = [("Options","\n".join([f'{self.emoji[index]} {option} \n' for index, option in enumerate(options)]),False)]
@@ -35,22 +36,23 @@ class Events(commands.Cog):
             for item in self.emoji[:len(options)]:
                 await message.add_reaction(item)
     
-    @commands.command()
+    @commands.command() #finalize this for me what exactly do u want?
     async def poll2(self, ctx):
-        options = "very little","okay","fair","a lot","very"
-        if len(options) > 5:
+        options = "😁","😠","💩","😱","😭","😵"
+        options2 = ["😁","😠","💩","😱","😭","😵"]
+        if len(options) > 6:
             await ctx.send("you can only send a maximum of 5 options")
         else:
             embed = Embed(title = "poll",description = "How stressful did you feel about this puzzle? ",colour =  ctx.author.colour,timestamp = datetime.utcnow())
-            fields = [("Options","\n".join([f'{self.emoji[index]} {option} \n' for index, option in enumerate(options)]),False)]
+            fields = [("Options","\n".join([f'{self.emotions[index]} {option} \n' for index, option in enumerate(options)]),False)]
             #embed.setthumbnail(urllink)
             for name,value, inline in fields:
                 embed.add_field(name = name,value = value,inline = inline)
                 
             message = await ctx.send(embed = embed)
 
-            for i in range(5):
-                await message.add_reaction(self.emoji[i])
+            for i in range(6):
+                await message.add_reaction(options2[i])
     
     
     async def make_channel(self,ctx,name : int):

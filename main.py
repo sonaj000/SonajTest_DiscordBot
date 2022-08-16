@@ -3,14 +3,9 @@ import discord
 from discord.ext import commands,tasks
 import os
 from dotenv import load_dotenv
-import youtube_dl
-import requests
 import json
 import random
-import eventstest
 import asyncio
-
-
 
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
@@ -60,6 +55,7 @@ async def on_ready():
 async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+        #run the bot chat here 
     
     if message.author == client.user:
         return
@@ -76,17 +72,6 @@ async def on_message(message):
     #check if the message is a reply in the dm channel(two boolean checks)
     #if so, make this a command or start eith 'get' get the author of the message it is referencing and send the dm or reply to them. """
 
-    """
-    if message.content.startswith('get'):
-        test_channel = client.get_channel(1002138142532440164)
-        fromtoday = await eventstest.getmessages(test_channel)
- 
-        test_channel2 = client.get_channel(999386683281768448)
-        for i in fromtoday:
-            await test_channel2.send(i.content)
-            await i.author.send(i.content) #send indivudal dm
-            #await i.reply("replied") #how to reply to the dm 
-        #we need to check if the channel is a dm channel for the onmesssage event. """
 
 bot.load_extension("Inspire")
 bot.load_extension("events")
