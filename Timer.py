@@ -6,7 +6,6 @@ from discord import Embed
 from discord.utils import get
 import asyncio
 
-bot = commands.Bot(command_prefix= '!')
 
 class Timer(commands.Cog):
 
@@ -23,14 +22,14 @@ class Timer(commands.Cog):
     @commands.command()
     async def create(self,ctx):
         try:
-            time = Timer(bot)
+            time = Timer(self.bot)
             self.record[self.counter] = time
             await ctx.send(f"Timer created... Timer number is {self.counter}")
             self.counter += 1
         except:
             await ctx.send("please recheck your command")
         
-    @bot.command()
+    @commands.command()
     async def start(self,ctx, number : int, seconds : int): 
         try:
             await ctx.send(f"Timer {self.record[number]} is about to start")
@@ -44,7 +43,7 @@ class Timer(commands.Cog):
         except ValueError:
             await ctx.send("in order to start the timer, please use command start followed by the timer number and how long u want it to run")
     
-    @bot.command()
+    @commands.command()
     async def kill(self,ctx,number : int):
         holder = self.record[number]
         await holder.stop(ctx)
@@ -53,7 +52,7 @@ class Timer(commands.Cog):
         except ValueError:
             ctx.send("already deleted")
     
-    @bot.command()
+    @commands.command()
     async def check(self,ctx):
         await ctx.send(self.record)
     
