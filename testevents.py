@@ -8,6 +8,7 @@ from datetime import datetime
 from discord import Embed
 from discord.utils import get
 import asyncio
+from discord import ChannelType
 
 client = commands.Bot(command_prefix='!')
 
@@ -55,7 +56,36 @@ class TestEvents(commands.Cog):
 
             for i in range(6):
                 await message.add_reaction(options2[i])
+
+    async def make_voice(self,ctx,name : int):
+        guild = ctx.guild
+        member = ctx.author
+        print(member)
+        admin_role = get(guild.roles, name="Guinea_Pig") #change admin here to guinea pig
+        overwrites = {
+            guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            member: discord.PermissionOverwrite(read_messages=True),
+            admin_role: discord.PermissionOverwrite(read_messages=True),
+            guild.me: discord.PermissionOverwrite(read_messages=True)
+            }
+            
+        channel = await guild.create_voice_channel(str(name), overwrites=overwrites)
     
+    @commands.command()
+    async def make_vchannels(self,ctx):
+        ec = []
+        for c in ctx.guild.voice_channels:
+            if c.type == ChannelType.voice:
+                ec.append(c.name)
+        await ctx.send(ec)
+        #if channel already exists ignore
+        for key in self.playtesters:
+            #if get channel is wrong then bleh 
+            channel_name = self.bot.get_user(key)
+            await ctx.send(channel_name.name)
+            if channel_name.name not in ec:
+                await self.make_voice(ctx, channel_name.name) 
+        
     
     async def make_channel(self,ctx,name : int):
         guild = ctx.guild
@@ -107,17 +137,20 @@ class TestEvents(commands.Cog):
         print(self.playtesters) 
         counter = 0
         #if channel already exists ignore
-        """ channel_names = ['channel1', 'channel2', 'channel3']
-            for ch in channel_names:
-                channel = discord.get.utils(server.channels, name=ch, type="ChannelType.voice")
-                full(channel)"""
+        ec = []
+        for c in ctx.guild.text_channels:
+            if c.type.name == "private":
+                ec.append(c.name)
+        await ctx.send(ec)
+        #
         for key in self.playtesters:
             #if get channel is wrong then bleh 
             channel_name = self.bot.get_user(key)
-            await self.make_channel(ctx, channel_name.name) 
-            channel = discord.utils.get(ctx.guild.channels, name= channel_name.name.lower())
-            self.playtesters[key] = channel
-            counter += 1
+            if channel_name.name not in ec:
+                await self.make_channel(ctx, channel_name.name) 
+                channel = discord.utils.get(ctx.guild.channels, name= channel_name.name.lower())
+                self.playtesters[key] = channel
+                counter += 1
         print(self.playtesters)
     
     @commands.command()

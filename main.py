@@ -47,7 +47,6 @@ async def on_ready():
         test_server = bot.get_guild(1009564966875050106)
 
         await test_channel.send("Hi. This is Lux Bot at your service!")
-
     
 @bot.listen()
 async def on_message(message):
