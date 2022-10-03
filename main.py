@@ -73,5 +73,6 @@ async def on_message(message):
 #bot.load_extension("Inspire")
 bot.load_extension("testevents")
 bot.load_extension("Timer")
+bot.load_extension("Wordle")
 
 bot.run(Discord_Token)
