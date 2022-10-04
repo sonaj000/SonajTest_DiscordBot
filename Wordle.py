@@ -31,7 +31,8 @@ class Wordle(commands.Cog):
             await ctx.send("Error could not be created")  
   
     async def Show(self,ctx):
-        await ctx.send(self.visual)
+        joined = " ".join(self.visual)
+        await ctx.send(joined)
         
     @commands.command()
     async def wc(self,ctx, *puzzle):
@@ -43,6 +44,9 @@ class Wordle(commands.Cog):
 
     async def replace(self,index):
         self.visual[index] = "🟩"
+        
+    async def replace2(self,index):
+        self.visual[index] = "🟨"
 
     @commands.command()
     async def Check(self,ctx, word : str):
@@ -68,7 +72,11 @@ class Wordle(commands.Cog):
                 if lowercased[i] == self.answer[i]:
                     print(lowercased[i])
                     await curr_wordle.replace(i)
-            await ctx.send(curr_wordle.visual)
+                elif lowercased[i] in self.answer:
+                    await curr_wordle.replace2(i) 
+            joined = " ".join(curr_wordle.visual)
+            await ctx.send(joined)
+            curr_wordle.visual = [":white_large_square:",":white_large_square:",":white_large_square:",":white_large_square:",":white_large_square:"]
 
     @commands.command()
     async def reset(self,ctx):

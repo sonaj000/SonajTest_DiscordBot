@@ -53,7 +53,7 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
         #run the bot chat here 
-    
+   
     if message.author == client.user:
         return
     fromtoday = []
