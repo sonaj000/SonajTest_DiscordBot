@@ -10,7 +10,7 @@ from Timer import Timer
 
 load_dotenv()
 Discord_Token = os.getenv("discord_token")
-intents = discord.Intents().all() #
+intents = discord.Intents.all() #
 intents.members = True
 client = discord.Client(intents=intents) #our bot
 
@@ -71,8 +71,30 @@ async def on_message(message):
 
 
 #bot.load_extension("Inspire")
+
+class MyBot(commands.Bot):
+    async def setup_hook(self):
+        print("this mybot class")
+        await self.load_extension('testevents')
+
+# after using async_with
+async def main():
+    async with bot:
+        await bot.load_extension('testevents')
+        await bot.load_extension("Timer")
+        await bot.load_extension("Wordle")
+        await bot.start(Discord_Token)
+
+asyncio.run(main())
+
+
+
+ 
+""" 
 bot.load_extension("testevents")
 bot.load_extension("Timer")
 bot.load_extension("Wordle")
 
-bot.run(Discord_Token)
+bot.run(Discord_Token)     
+
+"""

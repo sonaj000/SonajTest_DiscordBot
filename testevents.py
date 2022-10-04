@@ -10,7 +10,6 @@ from discord.utils import get
 import asyncio
 from discord import ChannelType
 
-client = commands.Bot(command_prefix='!')
 
 class TestEvents(commands.Cog):
 
@@ -183,7 +182,8 @@ class TestEvents(commands.Cog):
     async def stop(self,ctx):
         self.bTimer = False
         print("is set false")
-    
+  
+ 
     @commands.Cog.listener()
     async def on_message(self,message):
         print("triggered")
@@ -207,6 +207,6 @@ class TestEvents(commands.Cog):
     if the dm is private and message.author.role == any of the playtesters, find the member id in the dictionary and sends its dm to the corresponding channel"""
         
 
-def setup(bot):
-    bot.add_cog(TestEvents(bot))
+async def setup(bot):
+    await bot.add_cog(TestEvents(bot))
         
