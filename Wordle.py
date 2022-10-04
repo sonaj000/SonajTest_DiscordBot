@@ -1,6 +1,3 @@
-from multiprocessing.connection import answer_challenge
-from re import I
-import string
 import discord
 from discord.ext import commands
 import json
