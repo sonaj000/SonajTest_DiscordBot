@@ -10,6 +10,9 @@ from discord.utils import get
 import asyncio
 
 #import json file of the words
+with open('sgb-words.txt') as f:
+    lines = f.readlines()
+    print(lines[0:10])
 
 class Wordle(commands.Cog):
     #make a wordle message 
@@ -55,22 +58,31 @@ class Wordle(commands.Cog):
             await ctx.send("there is no exisitng wordle for this channel, please start a Wordle for this channel using the !WordleStart")
             return
         lowercased = word.lower()
-        if (len(word) != 5):
+        if (len(lowercased) != 5):
             await ctx.send("Word must be 5 characters long")
-            
-            """         elif(word is not in list):
+            return           
+        if((lowercased + "\n") not in lines):
             await ctx.send("word does not exist or we are unfamiliar with the word. please try again")
-            return """
+            return 
         else:
             await ctx.send("Word is 5 characters long")
             print(curr_wordle.answer)
             for i in range(len(lowercased)):
-                for j in range(len(self.answer)):
-                    if lowercased[i] == self.answer[j]:
-                        print(lowercased[i])
-                        await curr_wordle.replace(i)
+                if lowercased[i] == self.answer[i]:
+                    print(lowercased[i])
+                    await curr_wordle.replace(i)
             await ctx.send(curr_wordle.visual)
 
+    @commands.command()
+    async def reset(self,ctx):
+        curr_channel = ctx.channel
+        try:
+            self.record.pop(curr_channel)
+            await ctx.send("wordle is killed please use the !WordleStart command to restart")
+        except:
+            await ctx.send("there is no exisitng wordle for this channel to delete")
+            return
+        
 async def setup(bot):
     await bot.add_cog(Wordle(bot))           
     
