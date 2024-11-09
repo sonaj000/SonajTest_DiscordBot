@@ -1,19 +1,20 @@
 # SonajTest_DiscordBot
 This is a Discord bot with multiple functionalities.
 
-## Example Photos of Various Functionalities
-
-
-![Screenshot of the project](Wordle.png)
-![Screenshot of the project](poll.png)
-![Screenshot of the project](Directdm.png)
-![Screenshot of the project](timer.png)
-
 ## Features
 
 - **Feature 1**: Wordle
 - **Feature 2**: Polls.
 - **Feature 3**: Timers.
-- **Feature 4**: Direct
+- **Feature 4**: Direct Messaging
+
+<p align="center">
+  <img src="Wordle.png" alt="Screenshot of the project" width="450">
+  <img src="poll.png" alt="Screenshot of the project" width="450">
+  <img src="Directdm.png" alt="Screenshot of the project" width="450">
+  <img src="timer.png" alt="Screenshot of the project" width="450">
+</p>
+
+
 
 
