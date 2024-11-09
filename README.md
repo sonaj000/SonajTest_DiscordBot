@@ -8,7 +8,7 @@ This is a Discord bot with multiple functionalities.
 - **Feature 3**: Timers.
 - **Feature 4**: Direct Messaging
 
-<p align="center">
+<p align="left">
   <img src="Wordle.png" alt="Screenshot of the project" width="450">
   <img src="poll.png" alt="Screenshot of the project" width="450">
   <img src="Directdm.png" alt="Screenshot of the project" width="450">
