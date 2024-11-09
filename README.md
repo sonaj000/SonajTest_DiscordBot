@@ -10,11 +10,12 @@ This is a Discord bot with multiple functionalities.
 ## Example Photos of Various Functionalities
 
 <p align="center">
-  <img src="Wordle.png" alt="Screenshot of the project" width="250">
-  <img src="poll.png" alt="Screenshot of the project" width="250">
-  <img src="Directdm.png" alt="Screenshot of the project" width="250">
-  <img src="timer.png" alt="Screenshot of the project" width="250">
+  <img src="Wordle.png" alt="Screenshot of the project" width="300" height="200" style="object-fit: cover;">
+  <img src="poll.png" alt="Screenshot of the project" width="300" height="200" style="object-fit: cover;">
+  <img src="Directdm.png" alt="Screenshot of the project" width="300" height="200" style="object-fit: cover;">
+  <img src="timer.png" alt="Screenshot of the project" width="300" height="200" style="object-fit: cover;">
 </p>
+
 
 
 
